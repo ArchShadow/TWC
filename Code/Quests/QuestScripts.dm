@@ -25,7 +25,7 @@ quest
 		reward = /questReward/TutorialOther
 
 		Brew
-			desc = "The ingredients list says using rat powder, daisy powder, aconite, and aconite powder to make a regular health potion. Of course, you can do better than that however."
+			desc = "Simon asked you to brew a health potion. Try using rat tail, aconite, aconite extract and a daisy. Of course, experimentation will yield interesting things."
 			reqs = list("Brew Potion" = 1)
 
 		Reward
@@ -385,7 +385,7 @@ quest
 	Stickman
 		name   = "Draw Me a Stick \[Daily]"
 		desc   = "The stickman is found at the Chamber of Secrets floor 2, kill the Stickman and any Troll that gets in your way!"
-		reward = /questReward/Teleport
+		reward = /questReward/Teleport2
 		repeat = 864000
 
 		Kill
@@ -829,6 +829,11 @@ questReward
 		gold  = 16000
 		exp   = 160000
 		items = /obj/items/magic_stone/teleport
+	Teleport2
+		gold  = 20000
+		exp   = 200000
+		items = list(/obj/items/magic_stone/teleport,
+					 /obj/items/artifact)
 	RoyaleShoes
 		gold  = 5000
 		exp   = 10000

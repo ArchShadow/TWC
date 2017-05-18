@@ -179,11 +179,8 @@ mob/TalkNPC/quest
 					s.AddText("My brother was badly injured by some thugs wearing masks. I need you to brew a health potion of any sort.")
 					i_Player << "<i>You notice paleness in the brother's face as well as the red gashes all over his legs. He certainly won't be conscious for very long if he doesn't get treatment.</i>"
 					s.AddText("You can create a potion in the <b>Potions Classroom</b> near the Slytherin Common room in Hogwarts.")
-					s.AddText("Before you go, take these ingredients. You'll need them to create a potion.")
-					for(var/i = 1 to 5)
-						new /obj/items/ingredients/aconite (i_Player)
-						new /obj/items/ingredients/daisy (i_Player)
-						new /obj/items/ingredients/rat_tail (i_Player)
+					s.AddText("You can get some rat tails from rats and pixie wings from pixies. You'll need them to create a potion.")
+					s.AddText("There are other ingredients, too. But those are the easiest to find.")
 
 				if("Brewing Practice")
 					s.AddText("Hey, you might have a talent for potion brewing, why don't you go brew some more?")
@@ -213,6 +210,7 @@ mob/TalkNPC/quest
 						s.AddText("Thank you so much! If you hadn't shown up, my brother may not have lived!")
 					else
 						s.AddText("Please, hurry! He may not have much time.")
+
 				if("Brewing Practice")
 					if(.)
 						s.AddText("I hope you had fun brewing those, I tell you what, take this book and record the potion recipes you find, I'm sure it'll be fun!")
