@@ -56,7 +56,7 @@ var/list/drops_list = list("default" = list("0.5" = list(/obj/items/Whoopie_Cush
 							/obj/items/key/winter_key,
 							/obj/items/key/pet_key,
 							/obj/items/key/community_key,
-                      //      /obj/items/wearable/pets/sword,
+                            /obj/items/wearable/pets/sword,
 							/obj/items/wearable/title/Samurai,
 							/obj/items/vault_key),
 
@@ -77,6 +77,8 @@ var/list/drops_list = list("default" = list("0.5" = list(/obj/items/Whoopie_Cush
 
 
 "Rat"                = list("5"    =      /obj/items/ingredients/rat_tail),
+
+"Pixie"              = list("5"    =      /obj/items/ingredients/pixie_wing),
 
 "Demon Rat"          = list("5"    = list(/obj/items/demonic_essence,
                                           /obj/items/ingredients/rat_tail),
@@ -128,7 +130,7 @@ var/list/drops_list = list("default" = list("0.5" = list(/obj/items/Whoopie_Cush
 							"8"   = list(/obj/items/wearable/orb/chaos,
 							 			 /obj/items/wearable/orb/peace)),
 
-"Vampire Lord"       = list("10"   = list(/obj/items/colors/blood_stone,
+"Vampire Lord"       = list("9.9"   = list(/obj/items/colors/blood_stone,
 										  /obj/items/spellbook/blood,
 										  /obj/items/vault_key),
 							"30"   = list(/obj/items/colors/purple_stone,
@@ -137,6 +139,7 @@ var/list/drops_list = list("default" = list("0.5" = list(/obj/items/Whoopie_Cush
 						     			  /obj/items/colors/orange_stone,
 						     			  /obj/items/chest/wigs/basic_wig_chest),
 							"40"   =      /obj/items/chest/blood_chest),
+							"0.1"  =      /obj/items/wearable/brooms/vampire_wings,
 
 
 "Eye of The Fallen"  = list("2"    = /obj/items/wearable/pets/mad_eye,
