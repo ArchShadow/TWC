@@ -105,6 +105,9 @@ obj/items/ingredients
 	rat_tail
 		icon_state = "rat_tail"
 		id         = 4
+	pixie_wing
+		icon_state = "pixiewing"
+		id         = 5
 
 proc/spawnHerbs()
 
@@ -1032,21 +1035,26 @@ tr.black
 				ing = text2num(ing)
 				var/ingredients = ""
 
-				if(ing & 1)    ingredients += "daisy, "
-				if(ing & 2)    ingredients += "powdered daisy, "
-				if(ing & 4)    ingredients += "daisy extract, "
+				if(ing & 1)     ingredients += "daisy, "
+				if(ing & 2)     ingredients += "powdered daisy, "
+				if(ing & 4)     ingredients += "daisy extract, "
 
-				if(ing & 8)    ingredients += "aconite, "
-				if(ing & 16)   ingredients += "powdered aconite, "
-				if(ing & 32)   ingredients += "aconite extract, "
+				if(ing & 8)     ingredients += "aconite, "
+				if(ing & 16)    ingredients += "powdered aconite, "
+				if(ing & 32)    ingredients += "aconite extract, "
 
-				if(ing & 64)   ingredients += "eyes, "
-				if(ing & 128)  ingredients += "powdered eyes, "
-				if(ing & 256)  ingredients += "eyes extract, "
+				if(ing & 64)    ingredients += "eyes, "
+				if(ing & 128)   ingredients += "powdered eyes, "
+				if(ing & 256)   ingredients += "eyes extract, "
 
-				if(ing & 512)  ingredients += "rat tail, "
-				if(ing & 1024) ingredients += "powdered rat tail, "
-				if(ing & 2048) ingredients += "rat tail extract, "
+				if(ing & 512)   ingredients += "rat tail, "
+				if(ing & 1024)  ingredients += "powdered rat tail, "
+				if(ing & 2048)  ingredients += "rat tail extract, "
+
+				if(ing & 4096)  ingredients += "pixie wings, "
+				if(ing & 8192)  ingredients += "powdered pixie wings, "
+				if(ing & 16384) ingredients += "pixie wing extract, "
+
 				c++
 				html += "<tr class=[c % 2 == 0 ? "white" : "black"]><td>[c]</td><td>[potion]</td><td>[copytext(ingredients, 1, lentext(ingredients) - 1)].</td></tr>"
 
