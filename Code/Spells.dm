@@ -2144,6 +2144,7 @@ obj
 						else if (p.icon_state == "Seatio")
 							p.verbs -= /mob/test/verb/TransfigFly
 						else if (p.icon_state == "Harvesto")
+							p.verbs -= /mob/test/verb/TransfigFly
 
 						src.owner:learnSpell(name, 10)
 					else
