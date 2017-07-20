@@ -68,12 +68,49 @@ var/list/spellList = list(
 	/mob/Spells/verb/Eat_Slugs = "Eat Slugs",
 	/mob/Spells/verb/Disperse = "Disperse",
 	/mob/Spells/verb/Wingardium_Leviosa = "Wingardium Leviosa",
-	/mob/Spells/verb/Antifigura = "Antifigura")
+	/mob/Spells/verb/Antifigura = "Antifigura",
+	/mob/Spells/verb/Self_To_Animal = "Animagus Transfiguration",
+	/mob/test/verb/TransfigFly = "Fly")
 proc/name2spellpath(name)
 	for(var/V in spellList)
 		if(spellList[V] == name)
 			return V
 	world.log << "Was unable to find a spellpath in proc/name2spellpath with name=[name]"
+
+mob/test/verb/TransfigFly()
+	set name = "Fly"
+	set category = "Commands"
+	var/mob/Player/p = src
+	if (!p.trnsed && !p.Gm)
+		p.verbs -= /mob/test/verb/TransfigFly
+	else if (p.HP <= p.MHP * 0.4)
+		p<<"You are too wounded to fly!"
+	else
+		if (p.flying == 1)
+			p.density = 1
+			p.flying = 0
+
+			animate(p, pixel_y = 0, time = 5)
+			p.layer   = 4
+
+			spawn(6)
+				if(p.followers && !p.flying)
+					var/obj/Shadow/s = locate(/obj/Shadow) in p.followers
+					if(s)
+						s.Dispose()
+						p.removeFollower(s)
+						animate(p, flags = ANIMATION_END_NOW)
+
+		else if (p.flying == 0)
+			p.density = 0
+			p.flying = 1
+
+			p.layer   = 5
+			animateFly(p)
+
+			if(!p.followers || !(locate(/obj/Shadow) in p.followers))
+				var/obj/Shadow/s = new (p.loc)
+				p.addFollower(s)
 
 mob/Spells/verb/Accio(obj/M in oview(usr.client.view,usr))
 	set category = "Spells"
@@ -1074,7 +1111,7 @@ mob/Spells/verb/Tarantallegra(mob/Player/M in view()&Players)
 		var/mob/Player/p = src
 		p.MP-=100
 		p.updateHPMP()
-		if(key != "Murrawhip")
+		if(key != "ArchShadow")
 			M.dance=1
 		p.learnSpell("Tarantallegra")
 		src=null
@@ -1257,6 +1294,7 @@ mob/Spells/verb/Self_To_Dragon()
 			flick("transfigure",src)
 			p.trnsed = 1
 			p.overlays = null
+			p.verbs += /mob/test/verb/TransfigFly
 			if(p.away)p.ApplyAFKOverlay()
 			p.icon = 'Dragon.dmi'
 mob/Spells/verb/Self_To_Mushroom()
@@ -1271,6 +1309,7 @@ mob/Spells/verb/Self_To_Mushroom()
 			p.overlays = null
 			if(p.away) p.ApplyAFKOverlay()
 			p.trnsed = 1
+			p.verbs -= /mob/test/verb/TransfigFly
 			p.learnSpell("Personio Musashi")
 			switch(p.House)
 				if("Gryffindor")
@@ -1294,6 +1333,7 @@ mob/Spells/verb/Self_To_Skeleton()
 			flick("transfigure",p)
 			p.trnsed = 1
 			p.overlays = null
+			p.verbs -= /mob/test/verb/TransfigFly
 			if(p.away)p.ApplyAFKOverlay()
 			p.icon = 'Skeleton.dmi'
 			p.learnSpell("Personio Sceletus")
@@ -1306,6 +1346,9 @@ mob/Spells/verb/Other_To_Human(mob/Player/M in oview(usr.client.view,usr)&Player
 		if(CanTrans(M))
 			flick("transfigure",M)
 			M.trnsed = 0
+			M.density = 1
+			M.flying = 0
+			M.verbs -= /mob/test/verb/TransfigFly
 			M.BaseIcon()
 			M.ApplyOverlays()
 			usr<<"You reversed [M]'s transfiguration."
@@ -1319,6 +1362,9 @@ mob/Spells/verb/Self_To_Human()
 			var/mob/Player/p = src
 			flick("transfigure",p)
 			p.trnsed = 0
+			p.density = 1
+			p.flying = 0
+			p.verbs -= /mob/test/verb/TransfigFly
 			p.BaseIcon()
 			p.ApplyOverlays()
 			p<<"You reversed your transfiguration."
@@ -1421,7 +1467,7 @@ obj/Avada_Kedavra
 
 mob/Spells/verb/Avada_Kedavra()
 	set category="Spells"
-	if(key != "Murrawhip")
+	if(key != "ArchShadow")
 		hearers()<<"<b><span style=\"color:red;\">[src]:</b></span> <font color= #00FF33>Avada Kedavra !"
 	var/obj/S=new/obj/Avada_Kedavra
 
@@ -1623,6 +1669,38 @@ mob/Spells/verb/Scan(mob/Player/M in view()&Players)
 			p<<"\n<b>[M.name]'s Max HP:</b> [M.MHP+M.extraMHP]<br><b>[M.name]'s Max MP:</b> [M.MMP+M.extraMMP]"
 		p.learnSpell("Scan")
 
+mob/Spells/verb/Self_To_Animal()
+	set name = "Animagus Transfiguration"
+	set category="Spells"
+	if(canUse(src,cooldown=/StatusEffect/UsedTransfiguration,needwand=1,inarena=0,insafezone=1,inhogwarts=1,target=null,mpreq=0,againstocclumens=1,againstflying=0,againstcloaked=1))
+		new /StatusEffect/UsedTransfiguration(src,15)
+		if(CanTrans(src))
+			var/mob/Player/p = src
+			if(p.ror == 1)
+				p<<"You transformed yourself into a tiny mouse!"
+				flick("transfigure",src)
+				p.trnsed = 1
+				p.overlays = null
+				p.verbs -= /mob/test/verb/TransfigFly
+				if(p.away)p.ApplyAFKOverlay()
+				p.icon = 'Mouse.dmi'
+			else if (p.ror == 2)
+				p<<"You transformed yourself into a bird!"
+				flick("transfigure",src)
+				p.trnsed = 1
+				p.overlays = null
+				p.verbs += /mob/test/verb/TransfigFly
+				if(p.away)p.ApplyAFKOverlay()
+				p.icon = 'Bird.dmi'
+			else
+				p<<"You transformed yourself into a white cat!"
+				flick("transfigure",src)
+				p.trnsed = 1
+				p.overlays = null
+				p.verbs -= /mob/test/verb/TransfigFly
+				if(p.away)p.ApplyAFKOverlay()
+				p.icon = 'WhiteCat.dmi'
+
 var/safemode = 1
 mob/var/tmp/lastproj = 0
 mob
@@ -1730,6 +1808,24 @@ mob/Player
 			     angle  = new /Random(n - 25, n + 25),
 			     speed  = 2,
 			     life   = new /Random(15,25))
+
+			if(HP <= MHP * 0.4)
+				if(trnsed)
+					if(flying)
+						density = 1
+						flying = 0
+						src <<"[p.owner] knocked you to the ground with their [p]!"
+
+						animate(src, pixel_y = 0, time = 5)
+						layer   = 4
+
+						spawn(6)
+							if(src.followers && !src.flying)
+								var/obj/Shadow/s = locate(/obj/Shadow) in src.followers
+								if(s)
+									s.Dispose()
+									src.removeFollower(s)
+									animate(src, flags = ANIMATION_END_NOW)
 
 			if(HP <= 0)
 				if(isplayer(p.owner))
@@ -2028,6 +2124,26 @@ obj
 
 						p.icon       = 'Transfiguration.dmi'
 						p.icon_state = name
+
+						if (p.icon_state == "Peskipiksi Pestermi")
+							p.verbs += /mob/test/verb/TransfigFly
+						else if (p.icon_state == "Nightus")
+							p.verbs += /mob/test/verb/TransfigFly
+						else if (p.icon_state == "Delicio")
+							p.verbs += /mob/test/verb/TransfigFly
+						else if (p.icon_state == "Avifors")
+							p.verbs += /mob/test/verb/TransfigFly
+						else if (p.icon_state == "Carrotosi")
+							p.verbs -= /mob/test/verb/TransfigFly
+						else if (p.icon_state == "Ribbitous")
+							p.verbs -= /mob/test/verb/TransfigFly
+						else if (p.icon_state == "Scurries")
+							p.verbs -= /mob/test/verb/TransfigFly
+						else if (p.icon_state == "Felinious")
+							p.verbs -= /mob/test/verb/TransfigFly
+						else if (p.icon_state == "Seatio")
+							p.verbs -= /mob/test/verb/TransfigFly
+						else if (p.icon_state == "Harvesto")
 
 						src.owner:learnSpell(name, 10)
 					else
