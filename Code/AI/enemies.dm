@@ -371,7 +371,7 @@ mob
 mob
 	Enemies
 		icon = 'Mobs.dmi'
-		see_invisible = 1
+		see_invisible = 0
 		var/active = 0
 		var/HPmodifier = 1
 		var/DMGmodifier = 0.6
@@ -705,6 +705,23 @@ mob
 					//view(M)<<"<SPAN STYLE='color: blue'>[src]'s attack doesn't even faze [M]</SPAN>"
 				else
 					p.HP -= dmg
+					if(p.HP <= p.MHP * 0.4)
+						if(p.trnsed)
+							if(p.flying)
+								p.density = 1
+								p.flying = 0
+								hearers(p)<<"<SPAN STYLE='color: red'>[src]'s attack knocked [p] to the ground!"
+
+								animate(p, pixel_y = 0, time = 5)
+								p.layer   = 4
+
+								spawn(6)
+									if(p.followers && !p.flying)
+										var/obj/Shadow/s = locate(/obj/Shadow) in p.followers
+										if(s)
+											s.Dispose()
+											p.removeFollower(s)
+											animate(p, flags = ANIMATION_END_NOW)
 					hearers(p)<<"<SPAN STYLE='color: red'>[src] attacks [p] and causes [dmg] damage!</SPAN>"
 					if(src.removeoMob)
 						spawn() p.Death_Check(src.removeoMob)
@@ -775,6 +792,23 @@ mob
 					target.HP -= dmg
 					target.updateHPMP()
 					hearers(target)<<"<SPAN STYLE='color: red'>[src] attacks [target] and causes [dmg] damage!</SPAN>"
+					if(target.HP <= target.MHP * 0.4)
+						if(target.trnsed)
+							if(target.flying)
+								target.density = 1
+								target.flying = 0
+								hearers(target)<<"<SPAN STYLE='color: red'>[src]'s attack knocks [target] to the ground!"
+
+								animate(target, pixel_y = 0, time = 5)
+								target.layer   = 4
+
+								spawn(6)
+									if(target.followers && !target.flying)
+										var/obj/Shadow/s = locate(/obj/Shadow) in target.followers
+										if(s)
+											s.Dispose()
+											target.removeFollower(s)
+											animate(target, flags = ANIMATION_END_NOW)
 					if(target.HP <= 0)
 						Kill(target)
 				sleep(AttackDelay)
