@@ -1906,6 +1906,9 @@ obj
 			src.owner = mob
 			src.name = name
 
+			if(icon_state == "fireball")
+				overlays += /obj/light
+
 			spawn(life)
 				Dispose()
 
