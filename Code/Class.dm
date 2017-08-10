@@ -136,7 +136,7 @@ class
 
 	projectile
 		subject = "DADA"
-		uses    = 10000
+		uses    = 7000
 		wand    = TRUE
 
 		start(mob/Player/p)
@@ -256,6 +256,10 @@ class
 			start(mob/Player/p)
 				..()
 				say("Once you flick your wand and point it at the student, they will be turned into a pixie.", p)
+		Animagus_Transfiguration
+			start(mob/Player/p)
+				..()
+				say("Just by having a wand with you, you can turn yourself into an animal. Though every person has a different one they turn into.",p)
 	Antifigura
 		subject = "Transfiguration"
 		mp      = 50
@@ -290,7 +294,7 @@ class
 			wand = TRUE
 			start(mob/Player/p)
 				..()
-				say("The Shield Charm causes minor to moderate jinxes, curses, and hexes to rebound upon the attacker.", p)
+				say("The Shield Charm blocks harmful projectiles for a minute, or until broken.", p)
 		Impedimenta
 			mp = 750
 			cd = 20
