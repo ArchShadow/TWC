@@ -1396,6 +1396,7 @@ obj/items/wearable/wands/cedar_wand //Thanksgiving
 						flick("transfigure",M)
 						M.overlays = null
 						M.trnsed = 1
+						M.verbs += /mob/test/verb/TransfigFly
 						if(M.away) M.ApplyAFKOverlay()
 						M.icon = 'Turkey.dmi'
 						M<<"<b><span style=\"color:#D6952B;\">Delicio Charm:</b></span> [usr] turned you into some Thanksgiving awesome-ness."
@@ -1649,6 +1650,8 @@ obj/items/wearable/wigs/female_teal_wig
 	icon = 'female_teal_wig.dmi'
 obj/items/wearable/wigs/female_royale_wig
 	icon = 'female_royale_wig.dmi'
+obj/items/wearable/wigs/female_lightgreen_wig
+	icon = 'female_lightgreen_wig.dmi'
 
 //Holiday//
 obj/items/wearable/wigs/female_christmas_wig
@@ -3429,6 +3432,22 @@ obj/items
 				icon_state = "green"
 				drops      = "basic"
 
+			wizard_wig_chest
+				icon_state = "blue"
+				drops      = "wizard"
+
+			pentakill_wig_chest
+				icon_state = "red"
+				drops      = "pentakill"
+
+			sunset_wig_chest
+				icon_state = "purple"
+				drops      = "sunset"
+
+			prom_wig_chest
+				icon_state = "pink"
+				drops      = "prom"
+
 
 	key
 		icon = 'ChestKey.dmi'
@@ -3464,82 +3483,106 @@ var/list/chest_prizes = list("duel"      = list(/obj/items/wearable/scarves/duel
 					                            /obj/items/wearable/shoes/duel_shoes         = 30,
 					                            /obj/items/wearable/wands/duel_wand          = 20),
 
-							 "wizard"    = list(/obj/items/wearable/scarves/teal_scarf       = 50,
+							 "wizard"    = list(/obj/items/wearable/scarves/teal_scarf       = 40,
 					                            /obj/items/wearable/shoes/teal_shoes         = 30,
-					                            /obj/items/wearable/scarves/cyan_scarf       = 20),
+					                            /obj/items/wearable/scarves/cyan_scarf       = 20,
+					                            /obj/items/wearable/shoes/cyan_shoes         = 10),
 
-					         "pentakill" = list(/obj/items/wearable/scarves/black_scarf      = 40,
-							                    /obj/items/wearable/scarves/white_scarf      = 25,
-							                    /obj/items/wearable/shoes/black_shoes        = 20,
-							                    /obj/items/wearable/shoes/white_shoes        = 10,
-							                    /obj/items/wearable/scarves/grey_scarf       = 5),
+					         "male_wizard"   = list(/obj/items/wearable/wigs/male_teal_wig   = 50,
+					         					    /obj/items/wearable/wigs/male_cyan_wig   = 50),
 
-	                     	 "basic"     = list(/obj/items/wearable/scarves/black_scarf      = 10,
-							                    /obj/items/wearable/scarves/green_scarf      = 15,
-							                    /obj/items/wearable/scarves/red_scarf        = 15,
-							                    /obj/items/wearable/scarves/blue_scarf       = 15,
+					         "female_wizard" = list(/obj/items/wearable/wigs/female_teal_wig = 50,
+					         					    /obj/items/wearable/wigs/female_cyan_wig = 50),
+
+					         "pentakill" = list(/obj/items/wearable/scarves/black_scarf      = 45,
+							                    /obj/items/wearable/shoes/black_shoes        = 30,
+							                    /obj/items/wearable/scarves/grey_scarf       = 13,
+							                    /obj/items/wearable/shoes/grey_shoes         = 12),
+
+							 "male_pentakill"   = list(/obj/items/wearable/wigs/male_black_wig    = 35,
+							 						   /obj/items/wearable/wigs/male_silver_wig   = 35,
+							 						   /obj/items/wearable/wigs/male_grey_wig     = 30),
+
+						     "female_pentakill" = list(/obj/items/wearable/wigs/female_black_wig  = 35,
+						     						   /obj/items/wearable/wigs/female_silver_wig = 35,
+						     						   /obj/items/wearable/wigs/female_grey_wig   = 30),
+
+	                     	 "basic"     = list(/obj/items/wearable/scarves/green_scarf      = 20,
+							                    /obj/items/wearable/scarves/red_scarf        = 20,
+							                    /obj/items/wearable/scarves/blue_scarf       = 20,
 							                    /obj/items/wearable/scarves/yellow_scarf     = 20,
-							                    /obj/items/wearable/scarves/orange_scarf     = 25),
+							                    /obj/items/wearable/scarves/orange_scarf     = 20),
 
-	                     	 "sunset"    = list(/obj/items/wearable/scarves/sunset_scarf     = 4,
-												/obj/items/wearable/shoes/cyan_shoes         = 30,
-							                    /obj/items/wearable/shoes/darkblue_shoes     = 12,
-							                    /obj/items/wearable/scarves/darkblue_scarf   = 21,
-							                    /obj/items/wearable/shoes/darkpurple_shoes   = 12,
-							                    /obj/items/wearable/scarves/darkpurple_scarf = 21),
+							 "male_basic" = list(/obj/items/wearable/wigs/male_green_wig          = 20,
+							 					 /obj/items/wearable/wigs/male_red_wig            = 20,
+							 					 /obj/items/wearable/wigs/male_blue_wig           = 20,
+							 					 /obj/items/wearable/wigs/male_blond_wig          = 20,
+							 					 /obj/items/wearable/wigs/male_orange_wig         = 20),
 
-	                     	 "summer"    = list(/obj/items/wearable/shoes/orange_shoes       = 8,
-							                    /obj/items/wearable/shoes/yellow_shoes       = 21,
-							                    /obj/items/wearable/shoes/green_shoes        = 21,
-							                    /obj/items/wearable/shoes/red_shoes          = 21,
-							                    /obj/items/wearable/shoes/blue_shoes         = 21),
+							 "female_basic" = list(/obj/items/wearable/wigs/female_green_wig         = 20,
+							 					   /obj/items/wearable/wigs/female_red_wig           = 20,
+							 					   /obj/items/wearable/wigs/female_blue_wig          = 20,
+							 					   /obj/items/wearable/wigs/female_blonde_wig        = 20,
+							 					   /obj/items/wearable/wigs/female_orange_wig        = 20),
 
-							 "2015 sum"  = list(/obj/items/wearable/hats/orange_earmuffs     = 9,
-							                    /obj/items/wearable/hats/yellow_earmuffs     = 9,
-												/obj/items/wearable/shoes/orange_shoes       = 13,
-							                    /obj/items/wearable/shoes/yellow_shoes       = 23,
-							                    /obj/items/wearable/shoes/red_shoes          = 23,
-							                    /obj/items/wearable/shoes/blue_shoes         = 23),
+	                     	 "sunset"    = list(/obj/items/wearable/scarves/sunset_scarf     = 10,
+							                    /obj/items/wearable/shoes/darkblue_shoes     = 18,
+							                    /obj/items/wearable/scarves/darkblue_scarf   = 27,
+							                    /obj/items/wearable/shoes/darkpurple_shoes   = 18,
+							                    /obj/items/wearable/scarves/darkpurple_scarf = 27),
+
+							 "male_sunset" = list(/obj/items/wearable/wigs/male_darkblue_wig     = 40,
+							 					  /obj/items/wearable/wigs/male_darkpurple_wig   = 40,
+							 					  /obj/items/wearable/wigs/male_blackgreen_wig   = 20),
+
+							 "female_sunset" = list(/obj/items/wearable/wigs/female_darkblue_wig   = 40,
+							 						/obj/items/wearable/wigs/female_darkpurple_wig = 40,
+							 						/obj/items/wearable/wigs/female_redblack_wig   = 20),
+
+	                     	 "summer"    = list(/obj/items/wearable/shoes/green_shoes       = 20,
+							                    /obj/items/wearable/shoes/red_shoes         = 20,
+							                    /obj/items/wearable/shoes/blue_shoes        = 20,
+							                    /obj/items/wearable/shoes/yellow_shoes      = 20,
+							                    /obj/items/wearable/shoes/orange_shoes      = 20),
+
+							 "2015 sum"  = list(/obj/items/wearable/hats/green_earmuffs      = 22,
+							                    /obj/items/wearable/hats/red_earmuffs        = 22,
+												/obj/items/wearable/hats/blue_earmuffs       = 22,
+							                    /obj/items/wearable/hats/yellow_earmuffs     = 22,
+							                    /obj/items/wearable/hats/orange_earmuffs     = 12),
 
 	                     	 "prom"      = list(/obj/items/wearable/scarves/pink_scarf       = 40,
 							                    /obj/items/wearable/shoes/pink_shoes         = 30,
 							                    /obj/items/wearable/shoes/darkpink_shoes     = 10,
 							                    /obj/items/wearable/scarves/darkpink_scarf   = 20),
 
-							 "2015 prom" = list(/obj/items/wearable/hats/darkpink_earmuffs   = 5,
-												/obj/items/wearable/hats/lightpink_earmuffs  = 5,
-												/obj/items/wearable/scarves/pink_scarf       = 35,
-							                    /obj/items/wearable/shoes/pink_shoes         = 25,
-							                    /obj/items/wearable/shoes/darkpink_shoes     = 10,
-							                    /obj/items/wearable/scarves/darkpink_scarf   = 20),
+							 "male_prom" = list(/obj/items/wearable/wigs/male_pink_wig     = 35,
+							 					/obj/items/wearable/wigs/male_darkpink_wig = 35,
+							 					/obj/items/wearable/wigs/male_purple_wig   = 30),
 
-	                     	 "winter"    = list(/obj/items/wearable/shoes/candycane_shoes    = 6,
-							                    /obj/items/wearable/scarves/candycane_scarf  = 10,
-							                    /obj/items/wearable/scarves/red_scarf        = 27,
-							                    /obj/items/wearable/scarves/white_scarf      = 24,
-							                    /obj/items/wearable/shoes/red_shoes          = 18,
-							                    /obj/items/wearable/shoes/white_shoes        = 15),
+							 "female_prom" = list(/obj/items/wearable/wigs/female_pink_wig     = 35,
+							 					  /obj/items/wearable/wigs/female_darkpink_wig = 35,
+							 					  /obj/items/wearable/wigs/female_purple_wig   = 30),
 
-							 "2015 winter"  = list(/obj/items/wearable/hats/red_earmuffs        = 10,
-							                       /obj/items/wearable/hats/white_earmuffs      = 10,
-							                       /obj/items/wearable/shoes/candycane_shoes    = 35,
-							                       /obj/items/wearable/scarves/candycane_scarf  = 39,
+							 "2015 prom" = list(/obj/items/wearable/hats/darkpink_earmuffs    = 20,
+												/obj/items/wearable/hats/lightpink_earmuffs   = 30,
+												/obj/items/wearable/hats/darkpurple_earmuffs  = 20,
+							                    /obj/items/wearable/hats/lightpurple_earmuffs = 30),
+
+	                     	 "winter"    = list(/obj/items/wearable/shoes/candycane_shoes   = 15,
+							                    /obj/items/wearable/scarves/candycane_scarf = 25,
+							                    /obj/items/wearable/shoes/white_shoes       = 25,
+							                    /obj/items/wearable/scarves/white_scarf     = 35),
+
+							 "2015 winter"  = list(/obj/items/wearable/hats/cyan_earmuffs       = 25,
+							                       /obj/items/wearable/hats/white_earmuffs      = 22,
+							                       /obj/items/wearable/hats/teal_earmuffs       = 22,
+							                       /obj/items/wearable/hats/darkblue_earmuffs   = 25,
 												   /obj/items/snowring                          = 6),
 
 							 "blood"     = list(/obj/items/wearable/scarves/blood_scarf = 50,
 							 					/obj/items/wearable/shoes/blood_shoes   = 30,
 							 					/obj/items/wearable/wands/blood_wand    = 20),
-
-							 "male_basic" = list(/obj/items/wearable/wigs/male_black_wig   = 32,
-							 					   /obj/items/wearable/wigs/male_blond_wig = 32,
-							 					   /obj/items/wearable/wigs/male_grey_wig  = 32,
-							 					   /obj/items/wearable/wigs/male_brown_wig = 4),
-
-							 "female_basic" = list(/obj/items/wearable/wigs/female_black_wig    = 32,
-							 					     /obj/items/wearable/wigs/female_blonde_wig = 32,
-							 					     /obj/items/wearable/wigs/female_grey_wig   = 32,
-							 					     /obj/items/wearable/wigs/female_brown_wig  = 4),
-
 
 							 "community1"     = list(/obj/items/wearable/scarves/heartscarf    = 16,
 							 					     /obj/items/wearable/scarves/alien_scarf   = 22,
