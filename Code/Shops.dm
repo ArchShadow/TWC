@@ -620,22 +620,14 @@ obj/items/var/tmp/limit = 0
 var/list/shops = list("malewigshop" = newlist(
 						/obj/items/wearable/wigs/male_black_wig,
 						/obj/items/wearable/wigs/male_blond_wig,
-						/obj/items/wearable/wigs/male_blue_wig,
-						/obj/items/wearable/wigs/male_green_wig,
-						/obj/items/wearable/wigs/male_grey_wig,
-						/obj/items/wearable/wigs/male_pink_wig,
-						/obj/items/wearable/wigs/male_purple_wig,
-						/obj/items/wearable/wigs/male_silver_wig),
+						/obj/items/wearable/wigs/male_brown_wig,
+						/obj/items/wearable/wigs/male_grey_wig),
 
 					  "femalewigshop" = newlist(
 					  	/obj/items/wearable/wigs/female_black_wig,
 						/obj/items/wearable/wigs/female_blonde_wig,
-						/obj/items/wearable/wigs/female_blue_wig,
-						/obj/items/wearable/wigs/female_green_wig,
-						/obj/items/wearable/wigs/female_grey_wig,
-						/obj/items/wearable/wigs/female_pink_wig,
-						/obj/items/wearable/wigs/female_purple_wig,
-						/obj/items/wearable/wigs/female_silver_wig),
+						/obj/items/wearable/wigs/female_brown_wig,
+						/obj/items/wearable/wigs/female_grey_wig),
 
 					  "peace" = newlist(
 					  	/obj/items/wearable/masks/white_mask,
@@ -657,8 +649,8 @@ var/list/shops = list("malewigshop" = newlist(
 obj/items/spellbook/peace/price = 666
 obj/items/spellbook/blood/price = -666
 
-obj/items/spellbook/lumos/price = 1111
-obj/items/spellbook/aggravate/price = -1111
+obj/items/spellbook/lumos/price = 999
+obj/items/spellbook/aggravate/price = -999
 
 obj/items/wearable/masks/black_mask/price  = -444
 obj/items/wearable/masks/teal_mask/price   = -444
@@ -749,9 +741,7 @@ mob/TalkNPC/Artifacts_Salesman
 		"Double Drop Rate Lamp - 30 gold coins and 3 artifacts",
 		"Title: Rich - 1 platinum coin and 10 artifacts",
 		"Title: Treasure Hunter - 1 platinum coin and 10 artifacts",
-		"Title: Genie's Friend - 2 platinum coins and 20 artifacts",
-		"Community Key - 90 gold coins and 9 artifacts",
-		"Pet Key - 20 gold coins and 2 artifacts")
+		"Title: Genie's Friend - 2 platinum coins and 20 artifacts")
 
 		var/gold/g = new (usr)
 		switch(input("[name]: Hello... I sell lamps and magical rarities! Now now, they're not just lamps, they're magical lamps! My lamps will help you make your wishes come true! For the right price you might also net yourself something rare!", "You have [g.toString()]")as null|anything in itemlist)
@@ -776,12 +766,6 @@ mob/TalkNPC/Artifacts_Salesman
 			if("Title: Genie's Friend - 2 platinum coins and 20 artifacts")
 				selecteditem  = /obj/items/wearable/title/Genie
 				selectedprice = 20
-			if("Community Key - 90 gold coins and 9 artifacts")
-				selecteditem  = /obj/items/key/community_key
-				selectedprice = 9
-			if("Pet Key - 20 gold coins and 2 artifacts")
-				selecteditem  = /obj/items/key/pet_key
-				selectedprice = 2
 			if(null)
 				usr << npcsay("[name]: I only sell to the rich! Begone!")
 				return
@@ -821,27 +805,27 @@ proc
 		return n==round(n)
 
 
-obj/items/wearable/shoes/green_shoes/price = 2000000
-obj/items/wearable/shoes/blue_shoes/price = 2000000
-obj/items/wearable/shoes/red_shoes/price = 2000000
-obj/items/wearable/shoes/yellow_shoes/price = 2000000
-obj/items/wearable/shoes/white_shoes/price = 4000000
-obj/items/wearable/shoes/orange_shoes/price = 4000000
-obj/items/wearable/shoes/teal_shoes/price = 4000000
-obj/items/wearable/shoes/purple_shoes/price = 4000000
-obj/items/wearable/shoes/black_shoes/price = 4000000
-obj/items/wearable/shoes/pink_shoes/price = 4000000
-obj/items/wearable/scarves/yellow_scarf/price = 200000
-obj/items/wearable/scarves/black_scarf/price = 1600000
-obj/items/wearable/scarves/blue_scarf/price = 200000
-obj/items/wearable/scarves/green_scarf/price = 1600000
-obj/items/wearable/scarves/orange_scarf/price = 200000
-obj/items/wearable/scarves/pink_scarf/price = 1600000
-obj/items/wearable/scarves/purple_scarf/price = 2000000
-obj/items/wearable/scarves/red_scarf/price = 1600000
-obj/items/wearable/scarves/teal_scarf/price = 2200000
-obj/items/wearable/scarves/white_scarf/price = 2200000
-obj/items/wearable/bling/price = 250000
+obj/items/wearable/shoes/green_shoes/price = 200000
+obj/items/wearable/shoes/blue_shoes/price = 200000
+obj/items/wearable/shoes/red_shoes/price = 200000
+obj/items/wearable/shoes/yellow_shoes/price = 200000
+obj/items/wearable/shoes/white_shoes/price = 400000
+obj/items/wearable/shoes/orange_shoes/price = 400000
+obj/items/wearable/shoes/teal_shoes/price = 400000
+obj/items/wearable/shoes/purple_shoes/price = 400000
+obj/items/wearable/shoes/black_shoes/price = 400000
+obj/items/wearable/shoes/pink_shoes/price = 400000
+obj/items/wearable/scarves/yellow_scarf/price = 20000
+obj/items/wearable/scarves/black_scarf/price = 160000
+obj/items/wearable/scarves/blue_scarf/price = 20000
+obj/items/wearable/scarves/green_scarf/price = 160000
+obj/items/wearable/scarves/orange_scarf/price = 20000
+obj/items/wearable/scarves/pink_scarf/price = 160000
+obj/items/wearable/scarves/purple_scarf/price = 200000
+obj/items/wearable/scarves/red_scarf/price = 160000
+obj/items/wearable/scarves/teal_scarf/price = 220000
+obj/items/wearable/scarves/white_scarf/price = 220000
+obj/items/wearable/bling/price = 25000
 
 proc/RandomizeShop()
 	while(length(shops["random"]))
@@ -874,3 +858,100 @@ proc/RandomizeShop()
 		shops["random"] += item
 
 		items -= path
+
+
+mob/TalkNPC/Rosalie
+	icon = 'NPCs.dmi'
+	icon_state="shana"
+	name="Rosalie"
+
+	Talk()
+		set src in oview(2)
+		var/obj/selecteditem
+		var/selectedprice
+		var/gold/g = new(usr)
+		switch(input("Rosalie: Hi there! Welcome to my apothecary. We have potions and ingredients for sale, would you like some?","You have [g.toString()]")as null|anything in list("Bucket - 3 gold coins","Rat tail - 50 silver coins","Pixie wing - 50 silver coins","Aconite - 1 gold coin","Daisy - 1 gold coin","Eyes - 2 gold coins","Large health potion - 3 gold coins","Large mana potion - 2 gold coins"))
+			if("Bucket - 3 gold coins")
+				selecteditem = /obj/items/bucket
+				selectedprice = 30000
+			if("Rat tail - 50 silver coins")
+				selectedprice = 5000
+				selecteditem = /obj/items/ingredients/rat_tail
+			if("Pixie wing - 50 silver coins")
+				selectedprice = 5000
+				selecteditem = /obj/items/ingredients/pixie_wing
+			if("Aconite - 1 gold coin")
+				selectedprice = 10000
+				selecteditem = /obj/items/ingredients/aconite
+			if("Daisy - 1 gold coin")
+				selectedprice = 10000
+				selecteditem = /obj/items/ingredients/daisy
+			if("Eyes - 2 gold coins")
+				selectedprice = 20000
+				selecteditem = /obj/items/ingredients/eyes
+			if("Large health potion - 3 gold coins")
+				selectedprice = 30000
+				selecteditem = /obj/items/potions/health/large_health_potion
+			if("Large mana potion - 2 gold coins")
+				selectedprice = 20000
+				selecteditem = /obj/items/potions/mana/large_mana_potion
+			if(null)
+				usr << npcsay("Rosalie: Do come back if you change your mind.")
+				return
+		g = new(usr)
+		if(!g.have(selectedprice))
+			usr << npcsay("Rosalie: Unfortunately you don't have enough for this item - it's [selectedprice] bronze.")
+		else
+			g.change(usr, bronze=-selectedprice)
+			worldData.ministrybank += worldData.taxrate*selectedprice/100
+			new selecteditem(usr)
+			usr << npcsay("Rosalie: Thank you very much for your business!")
+			usr:Resort_Stacking_Inv()
+
+mob/TalkNPC/Jeff
+	icon = 'NPCs.dmi'
+	icon_state="jeff"
+	name="Jeff"
+
+	Talk()
+		set src in oview(2)
+		var/obj/selecteditem
+		var/selectedprice
+		var/gold/g = new(usr)
+		switch(input("Jeff: Welcome! Care to peruse my fine wares?","You have [g.toString()]")as null|anything in list("Basic key - 2 gold coins","Wizard key - 2 gold coins","Pentakill key - 2 gold coins","Sunset key - 2 gold coins","Prom key - 2 gold coins","Community key - 5 gold coins","Pet key - 5 gold coins","Summer key - 3 gold coins"))
+			if("Basic key - 2 gold coins")
+				selecteditem = /obj/items/key/basic_key
+				selectedprice = 20000
+			if("Wizard key - 2 gold coins")
+				selectedprice = 20000
+				selecteditem = /obj/items/key/wizard_key
+			if("Pentakill key - 2 gold coins")
+				selectedprice = 20000
+				selecteditem = /obj/items/key/pentakill_key
+			if("Sunset key - 2 gold coins")
+				selectedprice = 20000
+				selecteditem = /obj/items/key/sunset_key
+			if("Prom key - 2 gold coins")
+				selectedprice = 20000
+				selecteditem = /obj/items/key/prom_key
+			if("Community key - 5 gold coins")
+				selectedprice = 50000
+				selecteditem = /obj/items/key/community_key
+			if("Pet key - 5 gold coins")
+				selectedprice = 50000
+				selecteditem = /obj/items/key/pet_key
+			if("Summer key - 3 gold coins")
+				selectedprice = 30000
+				selecteditem = /obj/items/key/summer_key
+			if(null)
+				usr << npcsay("Jeff: I'm sorry i didn't have anything of interest to you.")
+				return
+		g = new(usr)
+		if(!g.have(selectedprice))
+			usr << npcsay("Jeff: You're a bit short on cash for this - it's [selectedprice] bronze.")
+		else
+			g.change(usr, bronze=-selectedprice)
+			worldData.ministrybank += worldData.taxrate*selectedprice/100
+			new selecteditem(usr)
+			usr << npcsay("Jeff: Come back anytime!")
+			usr:Resort_Stacking_Inv()
