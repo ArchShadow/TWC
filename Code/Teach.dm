@@ -469,6 +469,14 @@ mob/GM
 					M.screenAlert("You learned a new spell: Accio!")
 			src << infomsg("You've taught your class the Accio spell.")
 
+		Teach_Self_To_Animal()
+			set category = "Teach"
+			set hidden = 1
+			for(var/mob/Player/M in oview(client.view))
+				if(M.learnspell(/mob/Spells/verb/Self_To_Animal))
+					M.screenAlert("You learned a new spell: Animagus Transfiguration!")
+			src << infomsg("You've taught your class the Animagus Transfiguration spell.")
+
 		Teach_Ferula()
 			set category = "Teach"
 			set hidden = 1
