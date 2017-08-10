@@ -176,6 +176,7 @@ area/var/tmp/teleportNode/region
 var/curClass
 area
 	inside/ToWisps
+		planeColor = "#6464d0"
 	inside/Pixie_Pit
 
 	outsideHogwarts           // pathfinding related
@@ -514,7 +515,9 @@ area
 
 area
 	FredHouseTrap
+		planeColor = "#6464d0"
 	FredHouse
+		planeColor = "#6464d0"
 	tofred
 		Entered(mob/Player/M)
 			if(!isplayer(M))
@@ -540,8 +543,10 @@ mob/var/tmp/flying = 0
 area
 	Diagon_Alley
 		HogsmeadeSafeZone
+			planeColor = "#6464d0"
 		Bank
 		TomsCellar
+			planeColor = "#6464d0"
 	hogwarts
 		Azkaban
 		DEHQ
