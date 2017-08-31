@@ -651,6 +651,12 @@ obj/items/potions
 		effect     = /StatusEffect/Potions/Tame
 		seconds    = 600
 
+	wisdom
+		name       = "wisdom potion"
+		icon_state = "green"
+		effect     = /StatusEffect/Potions/Wisdom
+		seconds    = 1
+
 	super
 		luck
 			name       = "super felix felicis"

@@ -616,6 +616,25 @@ StatusEffect
 
 					sleep(10)
 
+		Wisdom
+			var/amount = 50000
+
+			Activate()
+				set waitfor = 0
+				..()
+				var/mob/Player/p = AttachedAtom
+
+				amount += (potion.quality - 4) * 10000
+
+				if(p.level < lvlcap)
+					p << infomsg("You gained [amount] experience.")
+					var/exp = p.Exp + amount
+					while(exp > p.Mexp)
+						exp -= p.Mexp
+						p.Exp  = p.Mexp
+						p.LvlCheck()
+				else
+					p << errormsg("You have already reached max level")
 
 		Mana
 			var/amount = 100
