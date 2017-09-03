@@ -315,6 +315,7 @@ class
 				..()
 				say("This handy spell prevents people from accessing your mind thus they won't be able to see where you are located. It uses your MP in seconds as the MP usage.", p)
 		Incarcerous
+			mp = 50
 			cd = 15
 			wand = TRUE
 			uses = 200
