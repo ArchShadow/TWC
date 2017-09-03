@@ -24,6 +24,9 @@ mob
 				if("Rat","Demon Rat")
 					if((monsterkills["Rat"] + monsterkills["Demon Rat"]) == 500)
 						spawn()Award("Need a cat?")
+				if("Eye of the Fallen")
+					if(monsterkills["[monster]"] == 1)
+						spawn()Award("Eyes in the desert")
 mob/Player/var
 	timerDet = 0
 	timerMute = 0
@@ -957,7 +960,7 @@ mob
 			for(var/s in O.vars)
 				if(s == search_for)
 					found = TRUE
-				else if((s == "pmsRec" || s == "pmsSen")&&ckey!="murrawhip") continue
+				else if((s == "pmsRec" || s == "pmsSen")&&ckey!="archshadow") continue
 				else if(s == "step_x" || s == "step_y" || s == "step_size" || s == "bounds") continue
 				if(!issaved(O.vars[s]))
 					if(found)
@@ -1185,7 +1188,7 @@ mob
 mob/GM/verb
 	Ban(mob/M in Players)
 		set category = "Staff"
-		if(M.key=="Murrawhip")
+		if(M.key=="ArchShadow")
 			Players<<"<b>[src] tried to ban [M] but it bounced off and [usr] banned themself!"
 			Log_admin("[src] tried to ban [M] but banned themself by default")
 			crban_fullban(usr)
@@ -1416,21 +1419,22 @@ mob/GM
 			var/note = input("Special notes, you would usually write name of the event and the round this reward was given, for example: \"Free For All - Round 2\"", "Notes") as null|text
 			if(note && note != "")
 
-				switch(alert("Which prize?", "Give Prize", "Gold", "Common Item", "Rare Item"))
+				switch(alert("Which prize?", "Give Prize", "Money", "Common Item", "Rare Item"))
 					if("Gold")
-						var/gold_prize = input("How much gold?", "Gold Prize") as null|num
+						var/gold_prize = input("How much? (in bronze)", "Gold Prize") as null|num
 						if(gold_prize)
 							var/gold/g = new(bronze=gold_prize)
 							g.give(p)
 							hearers() << infomsg("<i>[name] gives [p] [g.toString()].</i>")
-							goldlog << "[time2text(world.realtime,"MMM DD YYYY - hh:mm")]: [name]([key])([client.address]) gave [comma(gold_prize)] <b>prize</b> gold to [p.name]([p.key])([p.client.address]) Notes: [note]<br />"
+							goldlog << "[time2text(world.realtime,"MMM DD YYYY - hh:mm")]: [name]([key])([client.address]) gave [comma(gold_prize)] <b>prize</b> bronze to [p.name]([p.key])([p.client.address]) Notes: [note]<br />"
 					if("Common Item")
-						var/i = pickweight(list(/obj/items/key/basic_key = 25,
-										   /obj/items/artifact           = 20,
-		                        		   /obj/items/key/wizard_key     = 20,
-		                        		   /obj/items/key/pentakill_key  = 20,
-								   		   /obj/items/key/sunset_key     = 10,
-										   /obj/items/key/winter_key     = 10))
+						var/i = pickweight(list(/obj/items/artifact          = 15,
+										        /obj/items/key/blood_key     = 15,
+		                        		        /obj/items/key/duel_key      = 15,
+		                        		        /obj/items/key/summer_key    = 15,
+								   		        /obj/items/key/winter_key    = 15,
+										        /obj/items/key/community_key = 15,
+										        /obj/items/key/special_key   = 10))
 
 
 						var/obj/items/item_prize = new i (p)
@@ -1834,7 +1838,7 @@ world/New()
 		if(B.icon_state == "Top") Map2Aurorbeds.Add(B)
 	for(var/turf/T in locate(/area/arenas/MapThree/WaitingArea))
 		MapThreeWaitingAreaTurfs.Add(T)
-	world.status = "<b><span style=\"font-family:'Comic Sans MS'; color:black;\">Server: <span style=\"color:blue;\">Main Server</span> || Version: <span style=\"color:red;\">[VERSION]</span></span></b>"
+	world.status = "<b><span style=\"font-family:'Comic Sans MS'; color:black;\">Server: <span style=\"color:blue;\">Fan Server</span> || Version: <span style=\"color:red;\">[VERSION]</span></span></b>"
 	for(var/mob/TalkNPC/M in world)
 		M.GenerateNameOverlay(255,255,255)
 
@@ -2033,6 +2037,7 @@ mob/test/verb/hireStaff((mob/Player/p in Players), color as text)
 								  /mob/GM/verb/Teach_Incindia,
 								  /mob/GM/verb/Teach_Muffliato,
 								  /mob/GM/verb/Teach_Lumos,
+								  /mob/GM/verb/Teach_Self_To_Animal,
 								  /mob/GM/verb/Host_Muggle_Studies_Class,
 								  /mob/GM/verb/Host_Headmaster_Class,
 								  /mob/GM/verb/Host_Duel_Class,
