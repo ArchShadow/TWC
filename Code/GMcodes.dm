@@ -1420,8 +1420,8 @@ mob/GM
 			if(note && note != "")
 
 				switch(alert("Which prize?", "Give Prize", "Money", "Common Item", "Rare Item"))
-					if("Gold")
-						var/gold_prize = input("How much? (in bronze)", "Gold Prize") as null|num
+					if("Money")
+						var/gold_prize = input("How much?(in bronze)", "Gold Prize") as null|num
 						if(gold_prize)
 							var/gold/g = new(bronze=gold_prize)
 							g.give(p)
