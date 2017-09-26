@@ -170,6 +170,11 @@ class
 			start(mob/Player/p)
 				..()
 				say("The [name] projectile looks like a wave of water. If you recall, I said this projectile doesn't use MP, it's because it costs health instead, 30 per use.", p)
+		Fulmine_Fulgur
+			mp = 20
+			start(mob/Player/p)
+				..()
+				say("The [name] projectile looks like a ball of lightning.", p)
 
 	verbal
 		start(mob/Player/p)
@@ -257,6 +262,7 @@ class
 				..()
 				say("Once you flick your wand and point it at the student, they will be turned into a pixie.", p)
 		Animagus_Transfiguration
+			uses = 15
 			start(mob/Player/p)
 				..()
 				say("Just by having a wand with you, you can turn yourself into an animal. Though every person has a different one they turn into.",p)

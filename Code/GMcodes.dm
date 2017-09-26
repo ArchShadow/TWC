@@ -2038,6 +2038,7 @@ mob/test/verb/hireStaff((mob/Player/p in Players), color as text)
 								  /mob/GM/verb/Teach_Muffliato,
 								  /mob/GM/verb/Teach_Lumos,
 								  /mob/GM/verb/Teach_Self_To_Animal,
+								  /mob/GM/verb/Teach_Fulmine_Fulgur,
 								  /mob/GM/verb/Host_Muggle_Studies_Class,
 								  /mob/GM/verb/Host_Headmaster_Class,
 								  /mob/GM/verb/Host_Duel_Class,
