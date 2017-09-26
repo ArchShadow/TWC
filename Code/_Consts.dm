@@ -19,7 +19,8 @@
 #define VAULT_VERSION 4
 #define lvlcap 800
 #define SWAPMAP_Z 24
-#define WINTER 1
+#define WINTER 0
+#define AUTUMN 1
 #define HALLOWEEN 0
 #define NIGHTCOLOR "#6464d0"
 #define TELENDEVOUR_COLOR "#64d0d0"
@@ -44,6 +45,7 @@
 #define FIRE  2
 #define WATER 4
 #define GHOST 8
+#define ELECTRIC 16
 
 #define SWAMP  1
 #define SHIELD 2

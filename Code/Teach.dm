@@ -557,3 +557,11 @@ mob/GM
 				if(M.learnspell(/mob/Spells/verb/Herbificus))
 					M.screenAlert("You learned a new spell: Herbificus!")
 			src << infomsg("You've taught your class the Herbificus spell.")
+
+		Teach_Fulmine_Fulgur()
+			set category = "Teach"
+			set hidden = 1
+			for(var/mob/Player/M in oview(client.view))
+				if(M.learnspell(/mob/Spells/verb/Fulmine_Fulgur))
+					M.screenAlert("You learned a new spell: Fulmine Fulgur!")
+			src << infomsg("You've taught your class the Fulmine Fulgur spell.")

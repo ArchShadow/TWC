@@ -70,7 +70,7 @@ var/list/spellList = list(
 	/mob/Spells/verb/Wingardium_Leviosa = "Wingardium Leviosa",
 	/mob/Spells/verb/Antifigura = "Antifigura",
 	/mob/Spells/verb/Self_To_Animal = "Animagus Transfiguration",
-	/mob/test/verb/TransfigFly = "Fly")
+	/mob/Spells/verb/Fulmine_Fulgur = "Fulmine Fulgur")
 proc/name2spellpath(name)
 	for(var/V in spellList)
 		if(spellList[V] == name)
@@ -813,6 +813,10 @@ mob/Spells/verb/Tremorio()
 	set category="Spells"
 	if(canUse(src,cooldown=null,needwand=1,inarena=1,insafezone=0,inhogwarts=1,target=null,mpreq=5,againstocclumens=1,projectile=1))
 		castproj(MPreq = 5, icon_state = "quake", damage = usr.Dmg+usr.extraDmg + clothDmg, name = "Tremorio", element = EARTH)
+mob/Spells/verb/Fulmine_Fulgur()
+	set category="Spells"
+	if(canUse(src,cooldown=null,needwand=1,inarena=1,insafezone=0,inhogwarts=1,target=null,mpreq=20,againstocclumens=1,projectile=1))
+		castproj(MPreq = 20, icon_state = "elec", damage = (usr.Def+usr.extraDef + clothDef) / 2, name = "Fulmine Fulgur", element = ELECTRIC)
 
 mob/var/tmp/list/_input
 
@@ -1854,7 +1858,12 @@ mob/Enemies
 					p.damage += round(p.damage / 20, 1)
 
 				else if((element & WATER) && (p.element & (FIRE|EARTH)))
+					p.damage -= round(p.damage / 20, 1)
+
+				else if((element & WATER) && (p.element & ELECTRIC))
 					p.damage += round(p.damage / 20, 1)
+				else if((element & EARTH) && (p.element & ELECTRIC))
+					p.damage *= 0.1
 
 			if(canBleed)
 				var/n = dir2angle(get_dir(src, p))
