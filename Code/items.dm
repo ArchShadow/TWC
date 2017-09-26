@@ -1884,7 +1884,27 @@ obj/items/wearable/afk
 
 
 obj/items/wearable/bling
-	icon = 'bling.dmi'
+	New()
+		set waitfor = 0
+		..()
+		sleep(1)
+
+		if(name == initial(name))
+			if(prob(24))
+				name = "red [name]"
+				icon = 'bling_r.dmi'
+			else if(prob(24))
+				name = "blue [name]"
+				icon = 'bling_b.dmi'
+			else if(prob(24))
+				name = "yellow [name]"
+				icon = 'bling_y.dmi'
+			else if(prob(4))
+				name = "rainbow [name]"
+				icon = 'bling_rgb.dmi'
+			else
+				name = "green [name]"
+				icon = 'bling.dmi'
 	Equip(var/mob/Player/owner,var/overridetext=0)
 		. = ..(owner)
 		if(. == WORN)
