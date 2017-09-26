@@ -59,7 +59,15 @@ mob
 					usr << "I like his cape."
 			Talk()
 				set src in oview(3)
-				switch(alert("Hello there... My name is not important, however I have a few special services I can offer you for a price...","Mysterious Caped Fellow", "Rename - 25 Spell Points", "Reset Kills/Deaths - 60 Spell Points", "No Thanks"))
+				switch(alert("Hello there... My name is not important, however I have a few special services I can offer you for a price...","Mysterious Caped Fellow", "Artifact - 3 Spell Points", "Rename - 25 Spell Points", "Reset Kills/Deaths - 60 Spell Points", "No Thanks"))
+					if("Artifact - 3 Spell Points")
+						if(usr:spellpoints >= 3)
+							usr:spellpoints -= 3
+							new /obj/items/artifact(usr)
+							usr:Resort_Stacking_Inv()
+							usr << infomsg("The mysterious caped fellow gives you an artifact.")
+						else
+							usr << errormsg("You don't have enough spell points. You need [3 - usr:spellpoints] more spell points.")
 					if("Reset Kills/Deaths - 60 Spell Points")
 						if(usr:spellpoints >= 60)
 							usr:spellpoints -= 60
