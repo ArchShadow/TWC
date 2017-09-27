@@ -128,7 +128,11 @@ obj
 							p.addExp(exp, 1, 0)
 							if(p.level > 500) p.readbooks += rand(1, 2)
 							sleep(40)
-
+						if(src.name == "Magick Moste Evile" || "Secrets of the Darkest Art")
+							exp *= 4
+							exp = round(rand(exp - exp / 10, exp + exp / 10))
+							p.addExp(exp, 1, 0)
+							if(p.level > 500) p.readbooks += rand(1, 2)
 					if(p)
 						R.hide()
 						var/amount = abs(p.readbooks) - 1
@@ -216,6 +220,12 @@ obj
 		EXP_BOOK_lvlgryffindorupgraded
 			name = "Godric's Journal"
 			icon_state="gryffup"
+		EXP_BOOK_evile
+			name = "Magick Moste Evile"
+			icon_state="roses"
+		EXP_BOOK_secrets
+			name = "Secrets of the Darkest Art"
+			icon_state="secrets"
 
 proc
 	get_exp(var/level)
@@ -514,13 +524,18 @@ expRank
 				if(level % TIER == 1)
 					t = /obj/items/chest/legendary_golden_chest
 				else
-					t = pickweight(list(/obj/items/chest/basic_chest     = 30,
-			                        	/obj/items/chest/wizard_chest    = 20,
-			                        	/obj/items/chest/pentakill_chest = 20,
-										/obj/items/chest/winter_chest    = 15,
-										/obj/items/chest/prom_chest      = 10,
-										/obj/items/chest/pet_chest       = 10,
-			                        	/obj/items/chest/sunset_chest    = 6))
+					t = pickweight(list(/obj/items/chest/basic_chest              = 9,
+			                        	/obj/items/chest/wizard_chest             = 8,
+			                        	/obj/items/chest/pentakill_chest          = 8,
+										/obj/items/chest/winter_chest             = 9,
+										/obj/items/chest/prom_chest               = 8,
+										/obj/items/chest/pet_chest                = 8,
+			                        	/obj/items/chest/sunset_chest             = 9,
+			                        	/obj/items/chest/wigs/basic_wig_chest     = 8,
+			                        	/obj/items/chest/wigs/wizard_wig_chest    = 8,
+			                        	/obj/items/chest/wigs/pentakill_wig_chest = 9,
+			                        	/obj/items/chest/wigs/prom_wig_chest      = 8,
+			                        	/obj/items/chest/wigs/sunset_wig_chest    = 8))
 
 				var/obj/items/i = new t (parent)
 
@@ -567,13 +582,14 @@ proc/rewardExpWeek()
 
 			mail(winnerCkey, infomsg("Experience Week [ordinal(i + 1)] Prize, congratulations!"), 150000 - 50000*i)
 
-			var/t = pickweight(list(/obj/items/chest/basic_chest = 45,
-		                        /obj/items/chest/wizard_chest    = 15,
-		                        /obj/items/chest/pentakill_chest = 15,
-								/obj/items/chest/prom_chest      = 10,
-								/obj/items/chest/winter_chest    = 10,
-								/obj/items/chest/pet_chest       = 8,
-		                        /obj/items/chest/sunset_chest    = 5))
+			var/t = pickweight(list(/obj/items/chest/summer_chest             = 13,
+		                        /obj/items/chest/summer_chest/limited_edition = 12,
+		                        /obj/items/chest/winter_chest/limited_edition = 13,
+								/obj/items/chest/prom_chest/limited_edition   = 12,
+								/obj/items/chest/duel_chest                   = 12,
+								/obj/items/chest/blood_chest                  = 13,
+		                        /obj/items/chest/community1_chest             = 13,
+		                        /obj/items/chest/community2_chest             = 12))
 
 			var/obj/o = new t
 			mail(winnerCkey, infomsg("You also get a random chest!"), o)
