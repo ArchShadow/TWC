@@ -1115,8 +1115,7 @@ mob/Spells/verb/Tarantallegra(mob/Player/M in view()&Players)
 		var/mob/Player/p = src
 		p.MP-=100
 		p.updateHPMP()
-		if(key != "ArchShadow")
-			M.dance=1
+		M.dance=1
 		p.learnSpell("Tarantallegra")
 		src=null
 		spawn()
@@ -1197,6 +1196,8 @@ mob/Spells/verb/Incendio()
 		castproj(Type = /obj/projectile/BurnRoses, MPreq = 10, icon_state = "fireball", name = "Incendio")
 
 mob/Player/proc/BaseIcon()
+	if(name == "Training Dummy")
+		icon = 'Dummy.dmi'
 	if(Gender == "Female")
 		if(Gm)
 			icon = 'FemaleStaff.dmi'
@@ -1704,6 +1705,7 @@ mob/Spells/verb/Self_To_Animal()
 				p.verbs -= /mob/test/verb/TransfigFly
 				if(p.away)p.ApplyAFKOverlay()
 				p.icon = 'WhiteCat.dmi'
+			p.learnSpell("Animagus Transfiguration")
 
 var/safemode = 1
 mob/var/tmp/lastproj = 0
